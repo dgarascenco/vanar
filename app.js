@@ -35,9 +35,16 @@
         else if (e.target.tagName.toLowerCase() == "script") errorMsg.msg += `\n Cannot load ${errorMsg.type}.js component`;   
     }
 
-loadComponent("like")
+loadComponent("user")
 
 //////////Вывод потенциального сообщения об ошибке
     window.addEventListener("load", () => {   
         if (errorMsg.msg != "")    alert(errorMsg.msg)
     })
+
+    window.onload = function(){
+        let user1 = new User("Murka", "images/avatar1.png", "F", "UK", "1999.09.09")
+
+            user1.render(document.querySelector(".messages"))
+            user1.render(document.querySelector(".profile"), "md")
+    }
