@@ -8,17 +8,55 @@ class User {
         this.online = null
     }
 
-    render(rootElement, mode = "sm" ){
+    render(rootElement, mode = "sm", online = false ){
+
         let div = document.createElement('div')
-            div.className = "user-" + mode
+            div.className = "user-" + mode        
             div.appendChild( document.createElement('img') )
             div.children[0].src = this.avatar
 
-            if (mode == "md"){
-                let h2 = document.createElement('h2')
-                    h2.innerText = this.nickname
-                div.appendChild(h2)
-            }
+        let h_online = document.createElement('div')
+            h_online.className = "circle"            
+            h_online.style.width = h_online.style.height = "5px"
+
+            if (online == true) h_online.style.backgroundColor = "green"
+            else h_online.style.backgroundColor = "red"
+        
+        div.appendChild(h_online)
+
+        if (mode == "md"){
+            let h_nickname = document.createElement('h2')
+                h_nickname.innerText = this.nickname
+
+            div.appendChild(h_nickname)
+
+            h_online.style.width = h_online.style.height = "10px"
+        }
+        
+        if (mode == "lg"){
+            let h_nickname = document.createElement('h1')
+                h_nickname.innerText = this.nickname
+
+            let h_gender = document.createElement('h2')
+                h_gender.innerText = "Sex: " + this.gender
+                if ( this.gender == "F") h_gender.style.color = "red"
+                else if ( this.gender == "M") h_gender.style.color = "blue"
+                else  hGender.style.color = "gray"
+
+            let h_location = document.createElement('h2')
+                h_location.innerText += "From: " + this.location
+
+            let h_dob = document.createElement('h2')
+                h_dob.innerText += "Born: " + this.dob
+                
+            h_online.style.width = h_online.style.height = "20px"
+
+            div.appendChild(h_online)
+            div.appendChild(h_nickname)
+            div.appendChild(h_gender)
+            div.appendChild(h_location)
+            div.appendChild(h_dob)
+        }
 
         rootElement.appendChild(div)
     }

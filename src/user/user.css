@@ -1,0 +1,16 @@
+.user-sm img {
+    width: 80px;
+}
+
+.user-md img {
+    width: 150px;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 20px;    
+    float: right;
+    margin-right: 3%;
+    margin-top: 3%
+}
+
