@@ -45,6 +45,7 @@ loadComponent("user")
     window.onload = function(){
         let user1 = new User("Murka", "images/avatar1.png", "F", "UK", "1999.09.09")
 
-            user1.render(document.querySelector(".messages"))
-            user1.render(document.querySelector(".profile"), "md")
+            user1.render(document.querySelector(".messages"), "sm" , true)
+            user1.render(document.querySelector(".profile"), "md", true)
+            user1.render(document.querySelector(".main"), "lg", true)
     }
