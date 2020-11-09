@@ -36,6 +36,7 @@
     }
 
 loadComponent("user")
+loadComponent("search")
 
 //////////Вывод потенциального сообщения об ошибке
     window.addEventListener("load", () => {   
@@ -43,9 +44,7 @@ loadComponent("user")
     })
 
     window.onload = function(){
-        let user1 = new User("Murka", "images/avatar1.png", "F", "UK", "1999.09.09")
+        console.log('WINDOW LOADED!!!')
 
-            user1.render(document.querySelector(".messages"), "sm" , true)
-            user1.render(document.querySelector(".profile"), "md", true)
-            user1.render(document.querySelector(".main"), "lg", true)
+        testFakeUser()
     }
