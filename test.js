@@ -15,7 +15,7 @@ function testFakeUser(n=10){
                         faker.date.between("1970", "2000")
                         )
 
-        user.render(document.querySelector('.messages'), Math.random() <= 0.5)
+        user.render(document.querySelector('.messages'))
        // user.render(document.querySelector('.main'), "lg")
         users.push(user)
     }
