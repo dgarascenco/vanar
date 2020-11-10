@@ -10,34 +10,41 @@ class User {
 
     render(rootElement, mode = "sm"){ 
 
+        ////////// элемент пользователя в чате
         let div = document.createElement('div')
-            div.className = "user-" + mode        
+            div.className = "user-" + mode
             div.appendChild( document.createElement('img') )
             div.children[0].src = this.avatar
 
+        ///////// индикатор "онлайн"
         let h_online = document.createElement('div')
             h_online.className = "circle"            
             h_online.style.width = h_online.style.height = "5px"
+            h_online.style.display = "inline-block" 
+            if (this.online) h_online.style.backgroundColor = "green"
+            else h_online.style.backgroundColor = "red"
 
-
-        let online = Math.random() >= 0.5;
-
-
-        if (online == true) h_online.style.backgroundColor = "green"
-        else h_online.style.backgroundColor = "red"
-
+        ///////// имя пользователя
         let h_nickname = document.createElement('p')
-            h_nickname.innerText = this.nickname
-        
-        div.appendChild(h_online)        
+            h_nickname.innerText = this.nickname + " (" + this.gender + ")"
+            h_nickname.style.display = "inline-block"
+
         div.appendChild(h_nickname) 
+        div.appendChild(h_online) 
+
+        if (mode == "search"){
+            let h_nickname = document.createElement('h4')
+                h_nickname.innerText = this.nickname + " (" + this.gender + ") " + this.online
+            div.innerText=""
+            div.appendChild(h_nickname)
+            h_online.style.width = h_online.style.height = "10px"
+        }        
 
         if (mode == "md"){
             let h_nickname = document.createElement('h2')
                 h_nickname.innerText = this.nickname
 
             div.appendChild(h_nickname)
-
             h_online.style.width = h_online.style.height = "10px"
         }
         
@@ -57,7 +64,7 @@ class User {
             let h_dob = document.createElement('h2')
                 h_dob.innerText += "Born: " + this.dob
                 
-            h_online.style.width = h_online.style.height = "20px"
+           h_online.style.width = h_online.style.height = "20px"
 
             div.appendChild(h_online)
             div.appendChild(h_nickname)

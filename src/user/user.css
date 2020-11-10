@@ -11,6 +11,12 @@
     width: 20px;    
     float: right;
     margin-right: 3%;
-    margin-top: 3%
+    margin-top: 3%;
+    opacity: 0.5;
+    animation: fadeOut 5s infinite;
 }
 
+@keyframes fadeOut {
+    from{ opacity: 1; }
+    to{opacity: 0.6}
+}
