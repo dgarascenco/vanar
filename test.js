@@ -1,5 +1,5 @@
 function testFakeUser(n=10){
-    let genders = [ 'female' , 'male', 'trans' ];
+    let genders = [ 'female' , 'male', 'undecided' ];
     let online = []
     let users = []
     
@@ -16,21 +16,14 @@ function testFakeUser(n=10){
                         )
 
         user.render(document.querySelector('.messages'))
-       // user.render(document.querySelector('.main'), "lg")
         users.push(user)
     }
 
-    ///////////////!!!!  формирование массива из имен пользователей
-    let users_nicknames = []
-        for (i=0; i<users.length; i++)
-            users_nicknames.push(users[i].nickname)
-
-    console.log(users)
 
     /////////создание компонента search с передачей ему массива имен пользователей 
-    let search = new Search ('nickname', users_nicknames)
+    let search = new Search ('nickname', users)
         search.render( document.body.querySelector('.main') )
 
-    console.log(users_nicknames)
+  //  console.log(users_nicknames)
     console.log("%cENDING USER TESTS", "color: red")
 }

@@ -16,15 +16,14 @@
             link.rel = "stylesheet"
             link.href = `src/${name}/${name}.css`
             errorMsg.type = name
-            link.addEventListener( 'error',  errorAlert ) // добавлено
-            //link.addEventListener( 'error', function() { alert(  `\nERROR!\n Cannot load ${name}.css component`) } )
+            link.addEventListener( 'error',  errorAlert ) 
+
         document.head.appendChild(link)  
 
         let script = document.createElement('script')
             script.src = `src/${name}/${capitalize(name)}.js`
             errorMsg.type = name
-            script.addEventListener( 'error',  errorAlert ) // добавлено
-            //script.addEventListener( 'error', function() { alert(  `\nERROR!\n Cannot load ${name}.js component`) } )         
+            script.addEventListener( 'error',  errorAlert )   
         document.body.appendChild(script)    
     
     }
