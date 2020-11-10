@@ -58,20 +58,12 @@ class Search {
             let gender = document.querySelector( 'input[name="gender"]:checked');                               
             let online = document.querySelector('.online').firstChild
             let text = document.querySelector('.search').firstChild
+            let offline = true
 
-           console.log( e.target )
-
-            if ( online.checked == true )  {
                 searchArray.filter( value => value.nickname.toLowerCase().indexOf(text.value.toLowerCase()) != -1 )
                             .filter( value => gender.value.toLowerCase().indexOf(value.gender.toLowerCase()) != -1 )                           
-                            .filter( value => value.online == online.checked )
+                            .filter( value => value.online == online.checked || value.online == offline )
                             .filter( value => value.render( document.querySelector('.result'), "search" ) )
-            }////////// не знал как обойти ситуацию true/false 
-            else {
-                searchArray.filter( value => value.nickname.toLowerCase().indexOf(text.value.toLowerCase()) != -1 )
-                            .filter( value => gender.value.toLowerCase().indexOf(value.gender.toLowerCase()) != -1 )                                                           
-                            .filter( value => value.render( document.querySelector('.result'), "search" ) )                                                                                                                     
-            }
         }                                        
                     
        
