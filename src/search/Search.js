@@ -35,7 +35,7 @@ class Search {
             input_online.value = "true"
         let label = document.createElement("label")
             label.htmlFor = "online"
-            label.innerText = "On Line Only (default: off line)"
+            label.innerText = "On Line Only "
 
             div_online.appendChild(input_online)
             div_online.appendChild(label)
