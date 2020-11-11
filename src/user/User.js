@@ -9,6 +9,9 @@ class User {
     }
 
     render(rootElement, mode = "sm"){ 
+        let online
+        if (this.online) online = "on"
+        else online = "off"
 
         ////////// элемент пользователя в чате
         let div = document.createElement('div')
@@ -26,7 +29,7 @@ class User {
 
         ///////// имя пользователя
         let h_nickname = document.createElement('p')
-            h_nickname.innerText = this.nickname + " (" + this.gender + ")"
+            h_nickname.innerText = this.nickname + " (" + this.dob.getFullYear() + ")"
             h_nickname.style.display = "inline-block"
 
         div.appendChild(h_nickname) 
@@ -34,10 +37,16 @@ class User {
 
         if (mode == "search"){
             let h_nickname = document.createElement('h4')
-                h_nickname.innerText = this.nickname + " (" + this.gender + ") " + this.online
-            div.innerText=""
+                h_nickname.innerText = this.nickname
+                h_nickname.style.display = "inline-block"
+            div.innerText=""           
+            h_online.style.width = h_online.style.height = "5px"
+            h_online.style.float = "none"
+            div.appendChild(h_online) 
             div.appendChild(h_nickname)
-            h_online.style.width = h_online.style.height = "10px"
+            if ( this.gender == "Female") h_nickname.style.color = "red"
+            else if ( this.gender == "Male") h_nickname.style.color = "blue"
+            else  h_nickname.style.color = "gray"
         }        
 
         if (mode == "md"){
@@ -66,12 +75,17 @@ class User {
                 
            h_online.style.width = h_online.style.height = "20px"
 
+
             div.appendChild(h_online)
             div.appendChild(h_nickname)
             div.appendChild(h_gender)
             div.appendChild(h_location)
             div.appendChild(h_dob)
         }
+
+        if ( this.gender == "Female") h_nickname.style.color = "red"
+        else if ( this.gender == "Male") h_nickname.style.color = "blue"
+        else  h_nickname.style.color = "gray"
 
         rootElement.appendChild(div)
     }
