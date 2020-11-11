@@ -1,5 +1,5 @@
 function testFakeUser(n=10){
-    let genders = [ 'female' , 'male', 'undecided' ];
+    let genders = [ 'Female' , 'Male', 'Undecided' ];
     let online = []
     let users = []
     
