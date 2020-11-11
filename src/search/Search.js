@@ -32,6 +32,8 @@ class Search {
             div.appendChild(div_age)
         let ageFrom = document.createElement('select')
         let ageTo = document.createElement('select')
+        ageFrom.setAttribute("id", "yearFrom")
+        ageTo.setAttribute("id", "yearTo")
 
         for (let year = 1970; year <= 2020; year++) {
             let optionFrom = document.createElement("OPTION")
@@ -64,12 +66,10 @@ class Search {
             divResult.classList.add("result")
             div.appendChild(divResult)
 
-            let searchArray = this.searchArray
+        let searchArray = this.searchArray
  
-         input.addEventListener("keyup", eventSearch)
-        div.addEventListener("click", eventSearch)
-
-        console.log(searchArray[0].dob.getFullYear())
+        input.addEventListener("keyup", eventSearch)
+        div.addEventListener("click", eventSearch)       
         
         function eventSearch (e) {
             let div = document.querySelector('.result')
@@ -77,13 +77,15 @@ class Search {
             let gender = document.querySelector( 'input[name="gender"]:checked');                               
             let online = document.querySelector('.online').firstChild
             let text = document.querySelector('.search').firstChild
-            let offline = true
-            console.log(gender.value, searchArray[0].gender )
+            let yearFrom = document.getElementById('yearFrom')
+            let yearTo = document.getElementById('yearTo')          
 
-                searchArray.filter( value => value.nickname.toLowerCase().indexOf(text.value.toLowerCase()) != -1 )
-                            .filter( value => gender.value.indexOf( value.gender ) != -1  )                 
-                            .filter( value => value.online == online.checked || value.online == offline )
-                            .filter( value => value.render( document.querySelector('.result'), "search" ) )        }          
+                searchArray.filter( value => value.nickname.toLowerCase().indexOf(text.value.toLowerCase()) != -1 )                     //   фильтр по имени 
+                            .filter( value => gender.value.indexOf( value.gender ) != -1  )                                             //   фильтр по полу
+                            .filter( value => value.dob.getFullYear() >= yearFrom.value && value.dob.getFullYear() <= yearTo.value )    //   фильтр по возрасту 
+                            .filter( value => value.online == online.checked || value.online == true )                                  //   фильтр по статусу "в сети"
+                            .filter( value => value.render( document.querySelector('.result'), "search" ) )                             //   отображение фильтра
+                         }       
                     
        
     }
