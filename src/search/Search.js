@@ -1,6 +1,6 @@
 class Search {
 
-    constructor(type = 'nickname', searchArray){       
+    constructor(type = ' nickname', searchArray){       
         this.type = type 
         this.searchArray = searchArray
     }
@@ -22,9 +22,27 @@ class Search {
             div_gender.className = "gender"
             div.appendChild(div_gender)
         this.addGender('all', true)
-        this.addGender('male')
-        this.addGender('female')
-        this.addGender('undecided')
+        this.addGender('Male')
+        this.addGender('Female')
+        this.addGender('Undecided')
+
+        ///////////// блок фильтра по возрасту
+        let div_age = document.createElement('div')
+            div_age.className = "age"
+            div.appendChild(div_age)
+        let ageFrom = document.createElement('select')
+        let ageTo = document.createElement('select')
+
+        for (let year = 1970; year <= 2020; year++) {
+            let optionFrom = document.createElement("OPTION")
+            let optionTo = document.createElement("OPTION")
+            ageFrom.appendChild(optionFrom).innerHTML = year
+            ageTo.appendChild(optionTo).innerHTML = year
+        }
+        ageFrom[0].selected = true
+        ageTo[50].selected = true
+        div_age.appendChild(ageFrom)
+        div_age.appendChild(ageTo)
 
         /////////// блок онлайн
         let div_online = document.createElement('div')
@@ -50,21 +68,22 @@ class Search {
  
          input.addEventListener("keyup", eventSearch)
         div.addEventListener("click", eventSearch)
+
+        console.log(searchArray[0].dob.getFullYear())
         
         function eventSearch (e) {
-
             let div = document.querySelector('.result')
                 div.textContent = ""
             let gender = document.querySelector( 'input[name="gender"]:checked');                               
             let online = document.querySelector('.online').firstChild
             let text = document.querySelector('.search').firstChild
             let offline = true
+            console.log(gender.value, searchArray[0].gender )
 
                 searchArray.filter( value => value.nickname.toLowerCase().indexOf(text.value.toLowerCase()) != -1 )
-                            .filter( value => gender.value.toLowerCase().indexOf(value.gender.toLowerCase()) != -1 )                           
+                            .filter( value => gender.value.indexOf( value.gender ) != -1  )                 
                             .filter( value => value.online == online.checked || value.online == offline )
-                            .filter( value => value.render( document.querySelector('.result'), "search" ) )
-        }                                        
+                            .filter( value => value.render( document.querySelector('.result'), "search" ) )        }          
                     
        
     }
@@ -74,7 +93,7 @@ class Search {
         let radio = document.createElement("input")
             radio.setAttribute("type", "radio")
             radio.id = "gender_" + title
-            if (title == "all") radio.value = "allmalefemaleundecided"   /// некорректно получилось
+            if (title == "all") radio.value = "all*Male*Female*Undecided"   /// некорректно получилось
             else radio.value = title
             radio.name = "gender"
             radio.checked = check
