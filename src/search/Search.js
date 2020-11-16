@@ -99,10 +99,11 @@ class Search {
             for (let i=0; i<array.length; i++){
                 let option_form = document.createElement("option")
                 let option_to = document.createElement("option")
-                if (i==0) option_form.selected = true
-                if ( i==(array.length-1) ) option_to.selected = true
+
                 select_from.appendChild(option_form).innerHTML = option_form.value = array[i]
                 select_to.appendChild(option_to).innerHTML = option_to.value = select_to.value = array[i]
+                select_to.selectedIndex = 0
+                select_to.selectedIndex = array.length-1
             }
             div_range.appendChild(select_from) 
             div_range.appendChild(select_to)
@@ -140,7 +141,6 @@ class Search {
                 let phrase_from = document.getElementById("search_from_" + schemaKeys[i]).value
                 let phrase_to = document.getElementById("search_to_" + schemaKeys[i]).value
 
-                console.log("phrase_from: " + phrase_from + "phrase_to" + phrase_to )
                 result_h = result.filter( value => value[schemaKeys[i]].getFullYear() >= phrase_from &&  value[schemaKeys[i]].getFullYear() <= phrase_to)
             }
             if (typeof result_h == 'object')
