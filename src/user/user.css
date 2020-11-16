@@ -1,17 +1,32 @@
 .user-sm img {
-    width: 80px;
+    width: 40px; 
+}
+
+.user-sm *{
+    display: inline-block;
+}
+
+.user-sm .circle {
+    height: 5px;
+    margin-left: 15px;  
+    margin-right: 5px;
 }
 
 .user-md img {
-    width: 150px;
+    width: 100px;
 }
 
+.user-lg  p{
+    font-size: 30px;
+}
+
+p {
+    margin-top: 0.1em; 
+    margin-bottom: 0.1em; 
+   }
+
 .circle {
-    border-radius: 50%;
-    width: 20px;    
-    float: right;
-    margin-right: 3%;
-    margin-top: 3%;
+    border-radius: 50%;      
     opacity: 0.5;
     animation: fadeOut 5s infinite;
 }

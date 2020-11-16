@@ -8,10 +8,12 @@ class User {
         this.online = Math.random() <= 0.5
     }
 
+    getType(){
+        return "users"
+    }
+
     render(rootElement, mode = "sm"){ 
-        let online
-        if (this.online) online = "on"
-        else online = "off"
+        let currentDate = new Date()
 
         ////////// элемент пользователя в чате
         let div = document.createElement('div')
@@ -19,74 +21,71 @@ class User {
             div.appendChild( document.createElement('img') )
             div.children[0].src = this.avatar
 
-        ///////// индикатор "онлайн"
+        ///////// имя пользователя
+        let h_nickname = document.createElement('p')
+            h_nickname.innerText = this.nickname + " (" + ( currentDate.getFullYear()-this.dob.getFullYear() ) + " years)"
+            if ( this.gender == "Female") h_nickname.style.color = "red"        //    красный - цвет женского пола 
+            else if ( this.gender == "Male") h_nickname.style.color = "blue"    //    синий - цвет мужского пола  
+            else  h_nickname.style.color = "gray"                               //    серый - цвет остального пола
+
+        // ///////// индикатор "онлайн"
         let h_online = document.createElement('div')
             h_online.className = "circle"            
             h_online.style.width = h_online.style.height = "5px"
-            h_online.style.display = "inline-block" 
-            if (this.online) h_online.style.backgroundColor = "green"
-            else h_online.style.backgroundColor = "red"
-
-        ///////// имя пользователя
-        let h_nickname = document.createElement('p')
-            h_nickname.innerText = this.nickname + " (" + this.dob.getFullYear() + ")"
-            h_nickname.style.display = "inline-block"
-
+            if (this.online) h_online.style.backgroundColor = "green"           // зеленый - если пользователь в сети
+            else h_online.style.backgroundColor = "red"  
+                                   // красный - если пользователь не в сети
+        div.appendChild(h_online)
         div.appendChild(h_nickname) 
-        div.appendChild(h_online) 
 
-        if (mode == "search"){
-            let h_nickname = document.createElement('h4')
-                h_nickname.innerText = this.nickname
-                h_nickname.style.display = "inline-block"
-            div.innerText=""           
-            h_online.style.width = h_online.style.height = "5px"
-            h_online.style.float = "none"
-            div.appendChild(h_online) 
-            div.appendChild(h_nickname)
-            if ( this.gender == "Female") h_nickname.style.color = "red"
-            else if ( this.gender == "Male") h_nickname.style.color = "blue"
-            else  h_nickname.style.color = "gray"
-        }        
 
-        if (mode == "md"){
-            let h_nickname = document.createElement('h2')
-                h_nickname.innerText = this.nickname
-
-            div.appendChild(h_nickname)
+        if (mode == "md"){            
+            h_nickname.style.fontSize = "20px"
+            h_nickname.innerHTML = this.nickname           
             h_online.style.width = h_online.style.height = "10px"
+            div.innerHTML += this.location  + " - " + this.dob.getFullYear() + "<hr>"
         }
         
         if (mode == "lg"){
-            let h_nickname = document.createElement('h1')
-                h_nickname.innerText = this.nickname
-
-            let h_gender = document.createElement('h2')
+            h_nickname.style.fontSize = "30px"
+            let h_gender = document.createElement('p')
                 h_gender.innerText = "Sex: " + this.gender
-                if ( this.gender == "female") h_gender.style.color = "red"
-                else if ( this.gender == "male") h_gender.style.color = "blue"
-                else  h_gender.style.color = "gray"
-
-            let h_location = document.createElement('h2')
+            let h_location = document.createElement('p')
                 h_location.innerText += "From: " + this.location
+            let h_dob = document.createElement('p')
+                h_dob.innerText += "Born: " + this.dob                
+            h_online.style.width = h_online.style.height = "20px"
 
-            let h_dob = document.createElement('h2')
-                h_dob.innerText += "Born: " + this.dob
-                
-           h_online.style.width = h_online.style.height = "20px"
-
-
-            div.appendChild(h_online)
-            div.appendChild(h_nickname)
             div.appendChild(h_gender)
             div.appendChild(h_location)
             div.appendChild(h_dob)
         }
 
-        if ( this.gender == "Female") h_nickname.style.color = "red"
-        else if ( this.gender == "Male") h_nickname.style.color = "blue"
-        else  h_nickname.style.color = "gray"
-
         rootElement.appendChild(div)
+    }
+
+    getSchema(){
+        return {
+            nickname: {
+                type: "text",
+                key: "nickname"
+            },
+            gender: {
+                type: "checkbox",
+                key: "gender"
+            },
+            location: {
+                type: "select",
+                key: "location"
+            },
+            dob: {
+                type: "range",
+                key: "dob"
+            },
+            online: {
+                type: "checkbox",
+                key: "online"
+            }            
+        }
     }
 }
