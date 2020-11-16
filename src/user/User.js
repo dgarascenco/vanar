@@ -12,7 +12,7 @@ class User {
         return "users"
     }
 
-    render(rootElement, mode = "sm"){ 
+    render(rootElement, posts =[], mode = "sm"){ 
         let currentDate = new Date()
 
         ////////// элемент пользователя в чате
@@ -20,10 +20,18 @@ class User {
             div.className = "user-" + mode
             div.appendChild( document.createElement('img') )
             div.children[0].src = this.avatar
+            div.addEventListener("click", function(e){
+                let div_message = document.body.querySelector('.main')
+                    div_message.innerText = ""
+                    console.log(posts)                         
+                    posts.forEach(value => {
+                                                value.render(div_message)                  
+                                            })
+            })
 
         ///////// имя пользователя
         let h_nickname = document.createElement('p')
-            h_nickname.innerText = this.nickname + " (" + ( currentDate.getFullYear()-this.dob.getFullYear() ) + " years)"
+            h_nickname.innerText = this.nickname
             if ( this.gender == "Female") h_nickname.style.color = "red"        //    красный - цвет женского пола 
             else if ( this.gender == "Male") h_nickname.style.color = "blue"    //    синий - цвет мужского пола  
             else  h_nickname.style.color = "gray"                               //    серый - цвет остального пола
