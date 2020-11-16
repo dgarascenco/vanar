@@ -36,6 +36,7 @@
 
 loadComponent("user")
 loadComponent("search")
+loadComponent("post")
 
 //////////Вывод потенциального сообщения об ошибке
     window.addEventListener("load", () => {   
