@@ -19,11 +19,15 @@ function testFakeUser(n=10){
         users.push(user)
     }
 
-
+    
     /////////создание компонента search с передачей ему массива имен пользователей 
-    let search = new Search ('nickname', users)
-        search.render( document.body.querySelector('.main') )
+    let search = new Search (users)
 
-  //  console.log(users_nicknames)
+   // console.log(users)
+        search.render( document.body.querySelector('.profile') )
+
+
+        
+
     console.log("%cENDING USER TESTS", "color: red")
 }
